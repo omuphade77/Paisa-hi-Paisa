@@ -3,15 +3,21 @@ let graph = {};
 let usedDeps = new Set();
 
 // Step 1 — Confirm number of jobs
-document.getElementById("confirmJobs").addEventListener("click", () => {
+function handleConfirm() {
     const jobCount = parseInt(document.getElementById("jobCount").value);
     if (isNaN(jobCount) || jobCount <= 0) {
         alert("Please enter a valid number of jobs.");
         return;
     }
     document.getElementById("uploadSection").style.display = "block";
-});
+}
 
+document.getElementById("confirmJobs").addEventListener("click", handleConfirm);
+document.getElementById("jobCount").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        handleConfirm();
+    }
+});
 // Step 2 — Handle file upload
 document.getElementById("uploadBtn").addEventListener("click", () => {
     const files = Array.from(document.getElementById("jobFiles").files);
@@ -202,10 +208,10 @@ function displayResult(result) {
     const deadline = document.getElementById("deadline").value || "N/A";
 
     document.getElementById("resultText").innerHTML = `
-        ✅ <b>Maximum Profit:</b> ${profit}<br>
-        ⏱️ <b>Time Used:</b> ${used}s / ${deadline}s<br>
-        📋 <b>Optimal Sequence:</b> ${seq}<br>
-        🧩 <b>Dependency Chains:</b><br>${chains}
+         <b>Maximum Profit:</b> ${profit}<br>
+         <b>Time Used:</b> ${used}s / ${deadline}s<br>
+         <b>Optimal Sequence:</b> ${seq}<br>
+         <b>Dependency Chains:</b><br>${chains}
     `;
 
     console.log("Backend result:", result);

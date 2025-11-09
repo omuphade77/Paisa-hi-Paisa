@@ -1,8 +1,13 @@
 /* General page styling */
+
+
+
 body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  
   color: #222;
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  
   display: flex;
   justify-content: center;
   align-items: flex-start;
