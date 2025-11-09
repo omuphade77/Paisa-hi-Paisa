@@ -18,7 +18,7 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     padding: 30px;
     width: 100%;
-    max-width: 650px;
+    max-width: 1000px;
     text-align: center;
     transition: all 0.3s ease;
 }
