@@ -163,14 +163,22 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
 
     // Send to backend
     try {
+        console.log("Sending data to backend at http://127.0.0.1:8000/process_jobs");
         const response = await fetch("http://127.0.0.1:8000/process_jobs", {
             method: "POST",
             body: formData,
         });
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(`HTTP ${response.status}: ${text}`);
+        }
+
         const result = await response.json();
         displayResult(result);
     } catch (err) {
-        alert("Error submitting data: " + err);
+        alert("Error submitting data: " + err.message);
+        console.error("Fetch error:", err);
     }
 });
 
@@ -202,4 +210,3 @@ function displayResult(result) {
 
     console.log("Backend result:", result);
 }
-
