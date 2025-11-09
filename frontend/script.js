@@ -202,10 +202,10 @@ function displayResult(result) {
     const deadline = document.getElementById("deadline").value || "N/A";
 
     document.getElementById("resultText").innerHTML = `
-         <b>Maximum Profit:</b> ${profit}<br>
-         <b>Time Used:</b> ${used}s / ${deadline}s<br>
-         <b>Optimal Sequence:</b> ${seq}<br>
-         <b>Dependency Chains:</b><br>${chains}
+        ✅ <b>Maximum Profit:</b> ${profit}<br>
+        ⏱️ <b>Time Used:</b> ${used}s / ${deadline}s<br>
+        📋 <b>Optimal Sequence:</b> ${seq}<br>
+        🧩 <b>Dependency Chains:</b><br>${chains}
     `;
 
     console.log("Backend result:", result);
