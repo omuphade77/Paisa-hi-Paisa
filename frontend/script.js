@@ -168,9 +168,38 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
             body: formData,
         });
         const result = await response.json();
-        document.getElementById("resultSection").style.display = "block";
-        document.getElementById("resultText").innerText = result.message;
+        displayResult(result);
     } catch (err) {
         alert("Error submitting data: " + err);
     }
 });
+
+// --- Display result ---
+function displayResult(result) {
+    const section = document.getElementById("resultSection");
+
+    // Reset and trigger fade-in
+    section.classList.remove("show");
+    void section.offsetWidth; // forces reflow
+    section.classList.add("show");
+
+    section.style.display = "block";
+
+    const profit = result.max_profit ?? "N/A";
+    const used = result.used_time_ms ? (result.used_time_ms / 1000).toFixed(2) : "N/A";
+    const seq = result.sequence?.length ? result.sequence.join(" → ") : "No valid sequence";
+    const chains = result.chains?.length
+        ? result.chains.map(c => c.join(" → ")).join("<br>")
+        : "No dependency chains detected";
+    const deadline = document.getElementById("deadline").value || "N/A";
+
+    document.getElementById("resultText").innerHTML = `
+        ✅ <b>Maximum Profit:</b> ${profit}<br>
+        ⏱️ <b>Time Used:</b> ${used}s / ${deadline}s<br>
+        📋 <b>Optimal Sequence:</b> ${seq}<br>
+        🧩 <b>Dependency Chains:</b><br>${chains}
+    `;
+
+    console.log("Backend result:", result);
+}
+
